@@ -7,7 +7,7 @@ Globals:
   Function:
     Timeout: 30
 Resources:
-  LambdaRole1:
+  IAMCustom:
     Type: AWS::IAM::Role
     Properties:
       AssumeRolePolicyDocument:
@@ -29,7 +29,7 @@ Resources:
   StateFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Role: !GetAtt LambdaRole1.Arn
+      Role: !GetAtt IAMCustom.Arn
       CodeUri: state_function/
       Handler: app.lambda_handler
       Runtime: python3.8
