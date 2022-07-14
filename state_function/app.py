@@ -32,7 +32,7 @@ def lambda_handler(event, context):
 
     for rank in number[resume_number::]:
 
-        if (time.time() - start_time) < 10:
+        if (time.time() - fn_start_time) < 10:
             rank_file = open("/tmp/rank.txt",'wb') 
             pickle.dump(number,rank_file) #Storing the Rank
             rank_file.close()
