@@ -6,14 +6,35 @@ Description: >
 Globals:
   Function:
     Timeout: 30
-    
+Resources:
+  LambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName:
+        Fn::Sub: lambda-role
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action:
+            - sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service:
+              - lambda.amazonaws.com
+        Version: 2012-10-17
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AWSLambdaExecute
+        - arn:aws:iam::aws:policy/AmazonS3FullAccess
+        - arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
+        - arn:aws:iam::aws:policy/AmazonKinesisFullAccess
 
 Resources:
   StateFunction:
     Type: AWS::Serverless::Function
     Properties:
       Role:
-        Fn::Sub: 'arn:aws:iam::${AWS::AccountId}:role/AmazonDynamoDBFullAccess'
+        Fn::GetAtt:
+          - LambdaRole
+          - Arn
       CodeUri: state_function/
       Handler: app.lambda_handler
       Runtime: python3.8
