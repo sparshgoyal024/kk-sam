@@ -33,9 +33,7 @@ Resources:
     DependsOn: LambdaRole
     Properties:
       Role:
-        Fn::GetAtt:
-          - LambdaRole
-          - Arn
+        - Arn: !GetAtt LambdaRole.Arn
       CodeUri: state_function/
       Handler: app.lambda_handler
       Runtime: python3.8
