@@ -31,7 +31,7 @@ Resources:
   StateFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Role: !GetAtt LambdaRole1.Arn
+      Role: Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole1
       CodeUri: state_function/
       Handler: app.lambda_handler
       Runtime: python3.8
