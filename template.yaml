@@ -32,7 +32,7 @@ Resources:
     Type: AWS::Serverless::Function
     DependsOn: LambdaRole
     Properties:
-      Role: !Ref LambdaRole
+      Role: arn:aws:iam::*:role/LambdaRole
       CodeUri: state_function/
       Handler: app.lambda_handler
       Runtime: python3.8
