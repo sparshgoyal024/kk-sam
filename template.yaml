@@ -6,14 +6,22 @@ Description: >
 Globals:
   Function:
     Timeout: 30
-        
+    
+Resources:
+    GlobalRolelambda:
+        Type: 'AWS::IAM::Role'
+        Properties:
+            RoleName: !Ref MyRole
+            ManagedPolicyArns:
+                - 'arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess'
+                - 'arn:aws:iam::aws:policy/AWSLambdaExecute'
+
 Resources:
   StateFunction:
     Type: AWS::Serverless::Function
     Properties:
       Role:
-        - "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
-        - "arn:aws:iam::aws:policy/AWSLambdaExecute" 
+        Fn::Sub: 'arn:aws:iam::${AWS::AccountId}:role/MyRole'
       CodeUri: state_function/
       Handler: app.lambda_handler
       Runtime: python3.8
