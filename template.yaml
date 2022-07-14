@@ -7,7 +7,7 @@ Globals:
   Function:
     Timeout: 30
 Resources:
-  LambdaRole:
+  LambdaRole1:
     Type: AWS::IAM::Role
     Properties:
       RoleName:
@@ -30,7 +30,6 @@ Resources:
 Resources:
   StateFunction:
     Type: AWS::Serverless::Function
-    DependsOn: LambdaRole
     Properties:
       Role: arn:aws:iam::*:role/lambda-role
       CodeUri: state_function/
