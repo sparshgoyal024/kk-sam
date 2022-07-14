@@ -24,3 +24,30 @@ Resources:
         - arn:aws:iam::aws:policy/AmazonS3FullAccess
         - arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
         - arn:aws:iam::aws:policy/AmazonKinesisFullAccess
+
+Resources:
+  StateFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt LambdaRole1.Arn
+      CodeUri: state_function/
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Events:
+        StateFunction:
+          Type: Api
+          Properties:
+            Path: /
+            Method: get
+
+Outputs:
+  StateFunctionApi:
+    Description: "API Gateway endpoint URL"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod"
+
+
+Metadata:
+  AWS::ServerlessRepo::Application:
+    Name: state-app
+    Description: Execute Lambda for more than 15 minutes without Step Functions
+    Author: Sparsh Goyal
