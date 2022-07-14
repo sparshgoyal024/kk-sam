@@ -36,12 +36,6 @@ Outputs:
   StateFunctionApi:
     Description: "API Gateway endpoint URL"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod"
-  StateFunction:
-    Description: "Execute Lambda for more than 15 minutes without Step Functions"
-    Value: !GetAtt MyRole.Arn
-  StateFunctionIamRole:
-    Description: "State Function IAM Role"
-    Value: !GetAtt StateFunctionRole.Arn
 
 
 Metadata:
