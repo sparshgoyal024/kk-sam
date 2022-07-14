@@ -7,29 +7,27 @@ Globals:
   Function:
     Timeout: 30
 Resources:
-  IAMCustom:
+  HelloWorldRole:
     Type: AWS::IAM::Role
-    Properties:
+    Properties: 
       AssumeRolePolicyDocument:
+        Version: "2012-10-17"
         Statement:
-          - Action:
-            - sts:AssumeRole
-            Effect: Allow
+          - Effect: Allow
             Principal:
               Service:
-              - lambda.amazonaws.com
-        Version: 2012-10-17
-      ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/AmazonS3FullAccess
-        - arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
-
+                - lambda.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      ManagedPolicyArns: 
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
 
 Resources:
   StateFunction:
     Type: AWS::Serverless::Function
     DependsOn: IAMCustom
     Properties:
-      Role: !Ref IAMCustom
+      Role: !GetAtt HelloWorldRole.Arn
       CodeUri: state_function/
       Handler: app.lambda_handler
       Runtime: python3.8
