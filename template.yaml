@@ -10,8 +10,6 @@ Resources:
   LambdaRole1:
     Type: AWS::IAM::Role
     Properties:
-      RoleName:
-        Fn::Sub: lambda-role
       AssumeRolePolicyDocument:
         Statement:
           - Action:
@@ -31,7 +29,7 @@ Resources:
   StateFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Role: !Ref LambdaRole1
+      Role: !GetAtt LambdaRole1.Arn
       CodeUri: state_function/
       Handler: app.lambda_handler
       Runtime: python3.8
