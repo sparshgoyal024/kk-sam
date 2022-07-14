@@ -1,0 +1,40 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Execute Lambda for more than 15 minutes without Step Functions
+
+Globals:
+  Function:
+    Timeout: 30
+
+Resources:
+  StateFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: state_function/
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Events:
+        StateFunction:
+          Type: Api
+          Properties:
+            Path: /
+            Method: get
+
+Outputs:
+  StateFunctionApi:
+    Description: "API Gateway endpoint URL"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod"
+  StateFunction:
+    Description: "Execute Lambda for more than 15 minutes without Step Functions"
+    Value: !GetAtt StateFunction.Arn
+  StateFunctionIamRole:
+    Description: "State Function IAM Role"
+    Value: !GetAtt StateFunctionRole.Arn
+
+
+Metadata:
+  AWS::ServerlessRepo::Application:
+    Name: state-app
+    Description: Execute Lambda for more than 15 minutes without Step Functions
+    Author: Sparsh Goyal
