@@ -11,9 +11,9 @@ Resources:
   StateFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Role: [
-         "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess",
-         "arn:aws:iam::aws:policy/AWSLambdaExecute" ]
+      Role:
+        - "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess",
+        - "arn:aws:iam::aws:policy/AWSLambdaExecute" 
       CodeUri: state_function/
       Handler: app.lambda_handler
       Runtime: python3.8
