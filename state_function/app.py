@@ -28,7 +28,7 @@ def lambda_handler(event, context):
         index = open("/tmp/state.txt",'rb') 
         resume_number = pickle.load(index) #Reading Resume Index if function is executed again
         n=resume_number
-        infile_no.close()
+        index.close()
 
     for rank in number[resume_number::]:
 
