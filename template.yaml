@@ -13,8 +13,8 @@ Resources:
         Properties:
             RoleName: !Ref MyRole
             ManagedPolicyArns:
-                - 'arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess'
-                - 'arn:aws:iam::aws:policy/AWSLambdaExecute'
+                - 'arn:aws:iam::${AWS::AccountId}:policy/AmazonDynamoDBFullAccess'
+                - 'arn:aws:iam::${AWS::AccountId}:policy/AWSLambdaExecute'
 
 Resources:
   StateFunction:
