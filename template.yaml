@@ -29,7 +29,10 @@ Resources:
   StateFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Role: !Ref IAMCustom
+      Role:
+        Fn::GetAtt:
+          - IAMCustom
+          - Arn
       CodeUri: state_function/
       Handler: app.lambda_handler
       Runtime: python3.8
