@@ -2,7 +2,7 @@
 
 Execute AWS Lambda for more than 15 minutes without using Step Functions
 
-The function will initially sleep for 895 seconds, that has been put intentionally to making to function execution of 15minutes. Once 895 seconds are over, function will actually execute, and when 899 seconds are over, the function state will be saved in a state file, when this function is executed again, as in real-time this will be automated, the function will resume from the place where it left.
+The function will initially sleep for 880 seconds, that has been put intentionally to making to function execution of 15minutes. Once 895 seconds are over, function will actually execute, and when 899 seconds are over, the function state will be saved in a state file, when this function is executed again, as in real-time this will be automated, the function will resume from the place where it left.
 
 ## Instructions
 
