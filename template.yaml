@@ -7,6 +7,7 @@ Resources:
   HelloWorldRole:
     Type: AWS::IAM::Role
     Properties: 
+      RoleName: HelloWorldRole
       AssumeRolePolicyDocument:
         Version: "2012-10-17"
         Statement:
