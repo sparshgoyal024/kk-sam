@@ -1,0 +1,67 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: >-
+  SAM Lab
+Parameters:
+  InstanceType:
+    Type: String
+    Default: t2.micro
+Mappings:
+  AWSInstanceType2Arch:
+    t2.micro:
+      Arch: HVM64
+  AWSInstanceType2NATArch:
+    t2.micro:
+      Arch: NATHVM64
+  AWSRegionArch2AMI:
+    us-west-2:
+      HVM64: ami-01fee56b22f308154
+      HVMG2: ami-0fe84a5b4563d8f27
+Resources:
+  KeyPair:
+    Type: 'AWS::EC2::KeyPair'
+    Properties:
+      KeyName: LabKey
+  EC2Instance:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      KeyName: !Ref KeyPair
+      InstanceType: !Ref InstanceType
+      SecurityGroups:
+        - !Ref InstanceSecurityGroup
+      ImageId: ami-098e42ae54c764c35
+      UserData:
+        Fn::Base64: 
+          !Sub |
+            #!/bin/bash
+            yum update -y
+            amazon-linux-extras install docker -y
+            yum install awscli git zip unzip wget -y
+            service docker start
+            usermod -a -G docker ec2-user
+            wget https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip
+            unzip aws-sam-cli-linux-x86_64.zip -d sam-installation
+            ./sam-installation/install
+            echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.bashrc
+            source ~/.bashrc
+  InstanceSecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: Enable SSH access via port 22
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: '22'
+          ToPort: '22'
+          CidrIp: 0.0.0.0/0
+  LabDynamoDBTable:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: rank
+          AttributeType: 'S'
+      KeySchema:
+        - AttributeName: rank
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: '5'
+        WriteCapacityUnits: '5'
+      TableName: rank
