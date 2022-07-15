@@ -27,12 +27,12 @@ Globals:
 
 Resources:
   StateFunction:
-    DependsOn: HelloWorldRole  
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: state_function/
       Handler: app.lambda_handler
       Runtime: python3.8
+      Role: arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
       Events:
         StateFunction:
           Type: Api
