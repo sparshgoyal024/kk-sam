@@ -57,11 +57,11 @@ Resources:
     Properties:
       AttributeDefinitions:
         - AttributeName: rank
-          AttributeType: 'S'
+          AttributeType: "S"
       KeySchema:
         - AttributeName: rank
           KeyType: HASH
       ProvisionedThroughput:
         ReadCapacityUnits: '5'
         WriteCapacityUnits: '5'
-      TableName: rank
+      TableName: wiki
