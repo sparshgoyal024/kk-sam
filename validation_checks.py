@@ -10,7 +10,7 @@ def lambda_handler(event, context):
         count = count + 1
 
     ddb = boto3.resource('dynamodb')
-    table = ddb.Table("rank")
+    table = ddb.Table("wiki")
     response = table.scan()
     if any(response['Items']):
         count = count + 1 
