@@ -21,6 +21,8 @@ def lambda_handler(event, context):
         number = df.head(200).to_string(index=False).split("\n") 
         resume_number = 1 # Starting Index
         n=0 # Counter
+        print(time.time() - fn_start_time)
+        
     else:
         infile = open("/tmp/rank.txt",'rb') #Opening State file in read binary mode
         number = pickle.load(infile) #Actual Rank
@@ -29,10 +31,15 @@ def lambda_handler(event, context):
         resume_number = pickle.load(index) #Reading Resume Index if function is executed again
         n=resume_number
         index.close()
+        print(time.time() - fn_start_time)
 
     for rank in number[resume_number::]:
+        
+        print(time.time() - fn_start_time)
 
         if (time.time() - fn_start_time) < 30:
+            dynamodb.put_item(TableName='wiki', Item={'rank':{'S':rank}})
+            print(time.time() - fn_start_time)
             rank_file = open("/tmp/rank.txt",'wb') 
             pickle.dump(number,rank_file) #Storing the Rank
             rank_file.close()
@@ -40,7 +47,7 @@ def lambda_handler(event, context):
             n = resume_number + 1
             pickle.dump(n,state_file) #Storing the State
             state_file.close()
-            dynamodb.put_item(TableName='wiki', Item={'rank':{'S':rank}})
+
 
         else:
             break
