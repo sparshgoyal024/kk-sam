@@ -11,7 +11,7 @@ def lambda_handler(event, context):
 
     wiki_url='https://en.wikipedia.org/wiki/List_of_cities_in_India_by_population'
 
-    time.sleep(880) #seconds 
+    time.sleep(5) #seconds 
     diff_time = (time.time() - fn_start_time)
     dynamodb = boto3.client('dynamodb') #Init DynamoDB Client
 
@@ -32,7 +32,7 @@ def lambda_handler(event, context):
 
     for rank in number[resume_number::]:
 
-        if (time.time() - fn_start_time) < 899:
+        if (time.time() - fn_start_time) < 15:
             rank_file = open("/tmp/rank.txt",'wb') 
             pickle.dump(number,rank_file) #Storing the Rank
             rank_file.close()
