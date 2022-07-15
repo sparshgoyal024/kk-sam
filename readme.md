@@ -6,7 +6,7 @@ The function will initially sleep for 895 seconds, that has been put intentional
 
 ## Instructions
 
-1.  Execute the pre-provision.yaml template to launch an EC2 Instance with all dependencies, and DynamoDB with a Rank Table
+1.  Execute the provision.yaml template to launch an EC2 Instance with all dependencies, and DynamoDB with a Rank Table
 
 2.  Connect to the Instance using EC2 Instance Connect
 
@@ -52,6 +52,6 @@ The function will initially sleep for 895 seconds, that has been put intentional
 
 19. When prompted, provide the application details, this step might ask for multiple confirmations.
 
-20. Once done, you will be shown a API URL, execute in the browser, you should get output "Function Execution Successfuly"
+20. Once done, you will be shown a API URL, execute in the browser, you should get output "Function Executed Successfuly"
 
 21. Navigate to the DynamoDB and Check the Table for the new entries.
