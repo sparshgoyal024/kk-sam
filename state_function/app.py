@@ -40,7 +40,7 @@ def lambda_handler(event, context):
             n = resume_number + 1
             pickle.dump(n,state_file) #Storing the State
             state_file.close()
-            dynamodb.put_item(TableName='rank', Item={'rank':{'N':rank}})
+            dynamodb.put_item(TableName='rank', Item={'rank':{'S':rank}})
 
         else:
             break
