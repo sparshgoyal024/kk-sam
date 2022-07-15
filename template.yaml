@@ -27,6 +27,7 @@ Globals:
 
 Resources:
   StateFunction:
+    DependsOn: HelloWorldRole  
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: state_function/
