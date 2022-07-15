@@ -11,7 +11,7 @@ def lambda_handler(event, context):
 
     wiki_url='https://en.wikipedia.org/wiki/List_of_cities_in_India_by_population'
 
-    time.sleep(5) #seconds 
+    time.sleep(880) #seconds 
     diff_time = (time.time() - fn_start_time)
     dynamodb = boto3.client('dynamodb') #Init DynamoDB Client
 
@@ -21,7 +21,6 @@ def lambda_handler(event, context):
         number = df.head(200).to_string(index=False).split("\n") 
         resume_number = 1 # Starting Index
         n=0 # Counter
-        print(time.time() - fn_start_time)
         
     else:
         infile = open("/tmp/rank.txt",'rb') #Opening State file in read binary mode
@@ -31,15 +30,15 @@ def lambda_handler(event, context):
         resume_number = pickle.load(index) #Reading Resume Index if function is executed again
         n=resume_number
         index.close()
-        print(time.time() - fn_start_time)
+       
 
     for rank in number[resume_number::]:
         
-        print(time.time() - fn_start_time)
+        
 
-        if (time.time() - fn_start_time) < 30:
+        if (time.time() - fn_start_time) < 899:
+            
             dynamodb.put_item(TableName='wiki', Item={'rank':{'S':rank}})
-            print(time.time() - fn_start_time)
             rank_file = open("/tmp/rank.txt",'wb') 
             pickle.dump(number,rank_file) #Storing the Rank
             rank_file.close()
