@@ -1,4 +1,4 @@
-## Introduction
+## About
 
 Execute AWS Lambda for more than 15 minutes without using Step Functions
 
@@ -25,9 +25,11 @@ The function will initially sleep for 895 seconds, that has been put intentional
     This command will prompt for credentials.
 
 5.  Execute the below command to initiate a SAM Application
+
     ```sh
     sam init
     ```
+    
     It will prompt for the choice, press 2, as you are using custom template.
 
 5.  When prompted for the application repository, enter below command:
