@@ -9,10 +9,6 @@ The function will initially sleep for 895 seconds, that has been put intentional
 1.  Execute the pre-provision.yaml template to launch an EC2 Instance with all dependencies, and DynamoDB with a Rank Table
 
 2.  Connect to the Instance using EC2 Instance Connect
-    ```sh
-    echo "export ENDPOINTS_GAE_SDK=/usr/lib/google-cloud-sdk/platform/google_appengine" >> ~/.bashrc
-    source ~/.bashrc
-    ```
 
 3.  Once you are in the Terminal, use the below command to provide super user priviledges
 
