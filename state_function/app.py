@@ -11,7 +11,7 @@ def lambda_handler(event, context):
 
     wiki_url='https://en.wikipedia.org/wiki/List_of_cities_in_India_by_population'
 
-    time.sleep(895) #seconds 
+    time.sleep(880) #seconds 
     diff_time = (time.time() - fn_start_time)
     dynamodb = boto3.client('dynamodb') #Init DynamoDB Client
 
