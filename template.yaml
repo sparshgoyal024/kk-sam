@@ -4,10 +4,10 @@ Description: >
   Execute Lambda for more than 15 minutes without Step Functions
 
 Resources:
-  HelloWorldRole:
+  StateFunctionRole:
     Type: AWS::IAM::Role
     Properties: 
-      RoleName: HelloWorldRole
+      RoleName: StateFunctionRole
       AssumeRolePolicyDocument:
         Version: "2012-10-17"
         Statement:
