@@ -3,9 +3,6 @@ Transform: AWS::Serverless-2016-10-31
 Description: >
   Execute Lambda for more than 15 minutes without Step Functions
 
-Globals:
-  Function:
-    Timeout: 30
 Resources:
   HelloWorldRole:
     Type: AWS::IAM::Role
@@ -22,10 +19,14 @@ Resources:
       ManagedPolicyArns: 
         - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
 
+Globals:
+  Function:
+    Timeout: 30
+
+
 Resources:
   StateFunction:
     Type: AWS::Serverless::Function
-    DependsOn: IAMCustom
     Properties:
       Role: !GetAtt HelloWorldRole.Arn
       CodeUri: state_function/
